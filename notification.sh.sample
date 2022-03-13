@@ -1,0 +1,13 @@
+#!/bin/bash
+
+send_notification_message () {
+    local MESSAGE="$1"
+
+    local TELEGRAM_CHAT_ID=""
+    local TELEGRAM_BOT_TOKEN=""
+
+    curl --silent -X POST \
+        -H 'Content-Type: application/json' \
+        -d "{\"parse_mode\": \"html\", \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${MESSAGE}\"}" \
+        https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage
+}
