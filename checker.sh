@@ -31,8 +31,6 @@ if [ "$PORT_ACCESS" -eq "0" ]; then
 
 Hostname: <b>$(hostname)</b>
 Command: <b>${KILL_COMMAND}</b>
-
-Please examine <b>debug.log</b>.
 EOF
 )
 
