@@ -54,7 +54,7 @@ collect_settings () {
 
     echo ""
     echo "Command used to stop current validator node. Something like 'systemctl stop gaiad.service', or anything suitable."
-    read -p "Shutdown command: " NODE_ADDRESS
+    read -p "Shutdown command: " KILL_COMMAND
 
 }
 
