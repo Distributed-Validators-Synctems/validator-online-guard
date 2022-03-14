@@ -162,7 +162,7 @@ add_cronjob_tasks () {
     TMPFILE=`mktemp /tmp/cron.XXXXXX`
     PWD=$(pwd)
 
-    crontab -l > $TMPFILE
+    sudo crontab -l > $TMPFILE
 
     CRON_RECORD=$(cat $TMPFILE | grep "# DVS Validator Online Guard")
     if [ -z "$CRON_RECORD" ]
@@ -175,7 +175,7 @@ add_cronjob_tasks () {
     echo ""
     cat $TMPFILE
     
-    crontab $TMPFILE
+    sudo crontab $TMPFILE
 }
 
 install_required_software
