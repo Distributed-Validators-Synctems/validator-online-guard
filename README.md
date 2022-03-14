@@ -10,6 +10,14 @@ The purpose of this script is to guard validator node against appearance of anot
 
 Supported operation systems: Debian, Ubuntu
 
+It is recommended to disable node autostart to prevent accidental node startup.
+
+## How it works
+
+Script runs every minute and checks specific port (26656 by default) on the remote system. And when it sees that this port become available it performs "Shutdown command" command from `root` user.
+
+Please do not forget to remove this script from `root` user cronjob after node will be shutted down. And do not forget to remove validator key from the system after that. 
+
 
 ## Usage
 
