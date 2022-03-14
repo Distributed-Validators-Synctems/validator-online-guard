@@ -2,18 +2,37 @@
 
 cd $(dirname "$0")
 
-#CONFIG_DIR=$1
+CONFIG_DIR=$1
 
-#source $CONFIG_DIR/config.sh
+if [ -f "${CONFIG_DIR}/notification.sh" ]; then
+    source ${CONFIG_DIR}/notification.sh
+fi
 
-# Move to config
-NODE_ADDRESS=$1
-P2P_PORT=$2
-KILL_COMMAND=$3
+notify () {
+    local MESSAGE=$1 
 
-PORT_ACCESS=$(nc -zvw1 ${NODE_ADDRESS} 26656 > /dev/null 2>&1 ; echo $?)
-HOST_ACCESS=$(ping -c 1 ${NODE_ADDRESS} > /dev/null 2>&1 ; echo $?)
+    # Send notification message to notification service. "send_notification_message" should be implemented in the '${CONFIG_DIR}/notification.sh'
+    if [[ $(type -t send_notification_message) == function ]]; then
+        send_notification_message "${MESSAGE}"
+    fi    
+}
 
-if [ "$PORT_ACCESS" -eq "0" -a "$HOST_ACCESS" -eq "0" ]; then
-    echo "${KILL_COMMAND}"
+source $CONFIG_DIR/config.sh
+
+PORT_ACCESS=$(nc -zvw1 ${NODE_ADDRESS} ${P2P_PORT} > /dev/null 2>&1 ; echo $?)
+
+if [ "$PORT_ACCESS" -eq "0" ]; then
+    eval "${KILL_COMMAND}"
+
+    local MESSAGE=$(cat <<-EOF
+<b>[Success] Chain node was stopped</b>
+
+Hostname: <b>$(hostname)</b>
+Command: <b>${KILL_COMMAND}</b>
+
+Please examine <b>debug.log</b>.
+EOF
+)
+
+    notify "${MESSAGE}"
 fi
