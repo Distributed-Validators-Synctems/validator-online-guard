@@ -6,6 +6,14 @@ The purpose of this script is to guard validator node against appearance of anot
 
 Supported operation systems: Debian, Ubuntu
 
+
+## Usage
+
+In order to install all required tools simply issue following command:
+
+`$ bash <(curl -s https://raw.githubusercontent.com/Distributed-Validators-Synctems/validator-online-guard/master/setup.sh)`
+
+
 ## Notifications
 
 In order to receive notifications about operation result please copy included `notification.sh.sample` into directory with `config.sh` and name it `notification.sh`. After that please provide correct values for `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN` variables inside `notification.sh`.
