@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Author: Albert Andrejev <albert.andrejev@gmail.com>
+
 cd $(dirname "$0")
 
 CONFIG_DIR=$1
